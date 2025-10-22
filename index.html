@@ -13,6 +13,16 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7f7f7;
         }
+        /* CSS for the smooth transition of the references box */
+        #apa-references {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        #apa-references.open {
+            max-height: 2000px; /* Large enough value to contain content */
+            transition: max-height 1.0s ease-in;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -64,17 +74,49 @@
 
                     <!-- Read Buttons Container -->
                     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                        <!-- PAPER PDF LINK (using simple name) -->
-                        <a href="essay.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform hover:scale-105">
+                        <!-- PAPER PDF LINK -->
+                        <a href="essay.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform hover:scale-105" target="_blank">
                             Read Full Paper (PDF)
                         </a>
-                        <!-- APA LINK: REVERTED TO A DIRECT LINK USING THE NEW, SIMPLE FILENAME -->
-                        <a href="apa_references.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-2 border-blue-600 text-base font-medium rounded-lg shadow-lg text-blue-600 bg-white hover:bg-blue-50 transition duration-150 ease-in-out transform hover:scale-105">
+                        <!-- NEW JS BUTTON: Removes all file linking risk -->
+                        <button id="toggle-apa" class="inline-flex items-center justify-center px-6 py-3 border border-2 border-blue-600 text-base font-medium rounded-lg shadow-lg text-blue-600 bg-white hover:bg-blue-50 transition duration-150 ease-in-out transform hover:scale-105">
                             View APA Resources & Citations
-                        </a>
+                        </button>
                     </div>
                 </div>
             </section>
+
+            <!-- NEW SECTION: EMBEDDED APA REFERENCES (Hidden by default) -->
+            <section id="apa-references" class="mb-16 bg-white rounded-xl shadow-xl mt-4">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-extrabold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
+                        APA 7th Edition References
+                    </h2>
+                    <p class="text-sm text-gray-500 mb-4">
+                        *Note: These references are provided directly on the page for guaranteed viewing.*
+                    </p>
+                    <!-- START OF USER'S ACTUAL REFERENCE CONTENT from Apa Resources.pdf -->
+                    <ul class="list-none space-y-4 text-gray-700 text-sm">
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Afghanistan. (2024e, December 22). Human Rights Watch. https://www.hrw.org/world-report/2024/country-chapters/afghanistan
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Afghanistan's women are still fighting: Inside the fight for rights under Taliban | UN Women - Headquarters. (2025b, June 27). UN Women - Headquarters. https://www.unwomen.org/en/news-stories/feature-story/2025/06/afghanistans-women-are-still-fighting-inside-the-fight-for-rights-under-taliban
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Afghanistan: Taliban restrictions on women's rights intensify. (2025b, May 1). UN News. https://news.un.org/en/story/2025/05/1162826
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Jazeera, A. (2023d, August 28). Rights groups condemn Taliban's new curbs on women's education, movement. Al Jazeera. https://www.aljazeera.com/news/2023/8/28/rights-groups-condemn-talibans-new-curbs-on-womens-education-movement
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Afghanistan: Taliban's arbitrary arrests and detention of women and girls over dress code must end immediately, UN experts say. (2024, February 2). United Nations. https://www.ohchr.org/en/press-releases/2024/02/afghanistan-talibans-arbitrary-arrests-and-detention-women-and-girls-over
+                        </li>
+                    </ul>
+                    <!-- END OF USER'S ACTUAL REFERENCE CONTENT -->
+                </div>
+            </section>
+
 
             <!-- Download Section (FOR LOCAL USE ONLY) -->
             <section id="download-files" class="mb-16">
@@ -152,6 +194,29 @@ United Nations Security Council. (2024). *Resolution 2712 (2024) concerning the 
 
         function downloadMarkdownFile() {
             downloadFile('apa_resources.md', 'text/markdown', apaResourcesContent);
+        }
+
+        // --- JAVASCRIPT FOR TOGGLE FUNCTIONALITY ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('toggle-apa');
+            const referencesSection = document.getElementById('apa-references');
+
+            // Function to toggle the display
+            toggleButton.addEventListener('click', () => {
+                referencesSection.classList.toggle('open');
+                
+                // Change button text dynamically
+                if (referencesSection.classList.contains('open')) {
+                    toggleButton.textContent = 'Hide References';
+                } else {
+                    toggleButton.textContent = 'View APA Resources & Citations';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
         }
     </script>
 </body>
