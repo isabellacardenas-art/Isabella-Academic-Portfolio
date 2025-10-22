@@ -13,6 +13,16 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7f7f7;
         }
+        /* CSS for the smooth transition of the references box */
+        #apa-references {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        #apa-references.open {
+            max-height: 2000px; /* Large enough value to contain content */
+            transition: max-height 1.0s ease-in;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -68,13 +78,43 @@
                         <a href="essay.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform hover:scale-105">
                             Read Full Paper (PDF)
                         </a>
-                        <!-- APA RESOURCES LINK: UPDATED TO NEW SAFE FILENAME -->
-                        <a href="apa_resources.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-2 border-blue-600 text-base font-medium rounded-lg shadow-lg text-blue-600 bg-white hover:bg-blue-50 transition duration-150 ease-in-out transform hover:scale-105">
+                        <!-- NEW JS BUTTON: Removes all file linking risk -->
+                        <button id="toggle-apa" class="inline-flex items-center justify-center px-6 py-3 border border-2 border-blue-600 text-base font-medium rounded-lg shadow-lg text-blue-600 bg-white hover:bg-blue-50 transition duration-150 ease-in-out transform hover:scale-105">
                             View APA Resources & Citations
-                        </a>
+                        </button>
                     </div>
                 </div>
             </section>
+
+            <!-- NEW SECTION: EMBEDDED APA REFERENCES (Hidden by default) -->
+            <section id="apa-references" class="mb-16 bg-white rounded-xl shadow-xl mt-4">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-extrabold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
+                        APA 7th Edition References
+                    </h2>
+                    <p class="text-sm text-gray-500 mb-4">
+                        *Note: These references are provided as text directly on the page for easy viewing.*
+                    </p>
+                    <ul class="list-none space-y-4 text-gray-700 text-sm">
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Al Jazeera. (2023, August 28). *Rights groups condemn Taliban’s new curbs on women’s education, movement*. https://www.aljazeera.com/news/2023/8/28/rights-groups-condemn-talibans-new-curbs-on-womens-education-movement
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Al Habtoor, K. A. [@KhalafAlHabtoor]. (2023, August 28). *I am unable to express the disappointment I feel now as The Afghan female students, whom I had provided an educational scholarship in* [Post]. X. https://x.com/KhalafAlHabtoor/status/1696229202562479619
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            Human Rights Watch. (2024). *Afghanistan*. In World Report 2024. Retrieved from [Insert the specific URL of the Afghanistan chapter here]
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            United Nations. (2024, February 2). *Afghanistan: Taliban's arbitrary arrests and detention of women and girls over dress code must end immediately, UN experts say*. https://www.ohchr.org/en/press-releases/2024/02/afghanistan-talibans-arbitrary-arrests-and-detention-women-and-girls-over-dress-code-must-end-immediately-un-experts-say
+                        </li>
+                        <li class="pl-5 text-justify indent-[-20px]">
+                            UN Women - Headquarters. (2025, June 27). *Afghanistan's women are still fighting: Inside the fight for rights under Taliban*. https://www.unwomen.org/en/news-stories/feature-story/2025/06/afghanistans-women-are-still-fighting-inside-the-fight-for-rights-under-taliban
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
 
             <!-- Download Section (FOR LOCAL USE ONLY) -->
             <section id="download-files" class="mb-16">
@@ -154,15 +194,24 @@ United Nations Security Council. (2024). *Resolution 2712 (2024) concerning the 
             downloadFile('apa_resources.md', 'text/markdown', apaResourcesContent);
         }
 
-        // Click listeners are updated to match the final links
-        document.querySelector('a[href="essay.pdf"]').addEventListener('click', function(e) {
-            // Safe to leave this in
+        // --- NEW JAVASCRIPT FOR TOGGLE FUNCTIONALITY ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('toggle-apa');
+            const referencesSection = document.getElementById('apa-references');
+
+            // Function to toggle the display
+            toggleButton.addEventListener('click', () => {
+                referencesSection.classList.toggle('open');
+                
+                // Change button text dynamically
+                if (referencesSection.classList.contains('open')) {
+                    toggleButton.textContent = 'Hide References';
+                } else {
+                    toggleButton.textContent = 'View APA Resources & Citations';
+                }
+            });
         });
-        
-        // This targets the new PDF link
-        document.querySelector('a[href="apa_resources.pdf"]').addEventListener('click', function(e) {
-            // Safe to leave this in
-        });
+
     </script>
 </body>
 </html>
