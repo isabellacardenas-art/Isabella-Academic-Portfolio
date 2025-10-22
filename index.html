@@ -64,12 +64,12 @@
 
                     <!-- Read Buttons Container -->
                     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                        <!-- PAPER PDF LINK -->
+                        <!-- PAPER PDF LINK (using simple name) -->
                         <a href="essay.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out transform hover:scale-105">
                             Read Full Paper (PDF)
                         </a>
-                        <!-- APA RESOURCES LINK: CHANGED TO USE URL ENCODING FOR THE SPACE -->
-                        <a href="Apa%20Resources.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-2 border-blue-600 text-base font-medium rounded-lg shadow-lg text-blue-600 bg-white hover:bg-blue-50 transition duration-150 ease-in-out transform hover:scale-105">
+                        <!-- APA RESOURCES LINK: UPDATED TO NEW SAFE FILENAME -->
+                        <a href="apa_resources.pdf" class="inline-flex items-center justify-center px-6 py-3 border border-2 border-blue-600 text-base font-medium rounded-lg shadow-lg text-blue-600 bg-white hover:bg-blue-50 transition duration-150 ease-in-out transform hover:scale-105">
                             View APA Resources & Citations
                         </a>
                     </div>
@@ -160,7 +160,7 @@ United Nations Security Council. (2024). *Resolution 2712 (2024) concerning the 
         });
         
         // This targets the new PDF link
-        document.querySelector('a[href="Apa%20Resources.pdf"]').addEventListener('click', function(e) {
+        document.querySelector('a[href="apa_resources.pdf"]').addEventListener('click', function(e) {
             // Safe to leave this in
         });
     </script>
